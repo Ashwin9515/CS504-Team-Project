@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify TOTP</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; margin-bottom: 20px; }
+        form {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 220px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <h1>Verify Authenticator Code</h1>
+    <form method="POST" action="/verify-totp">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="text" name="totp" placeholder="6-digit Authenticator Code" required pattern="\d{6}" maxlength="6" />
+        <button type="submit">Verify</button>
+    </form>
+</body>
+</html>

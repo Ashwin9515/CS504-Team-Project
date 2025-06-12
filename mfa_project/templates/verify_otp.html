@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f9f9f9; }
+        h1 { color: #333; }
+        form { display: inline-block; text-align: left; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+        input {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 220px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        button:hover { background-color: #218838; }
+        .resend-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .resend-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .resend-link a:hover {
+            text-decoration: underline;
+        }
+        ul { list-style-type: none; padding: 0; margin-top: 15px; }
+        li { font-weight: 600; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Verify Email OTP</h1>
+    <form method="POST" action="{{ url_for('verify_otp') }}" autocomplete="off">
+        <input type="text" name="username" placeholder="Username" required
+               value="{{ request.args.get('username', '') }}">
+        <input type="text" name="otp" placeholder="Enter 4-digit Email OTP"
+               pattern="\d{4}" required maxlength="4" autocomplete="one-time-code" />
+        <button type="submit">Verify</button>
+    </form>
+
+    <div class="resend-link">
+        <a href="{{ url_for('resend_otp') }}?username={{ request.args.get('username', '') }}">Resend OTP to Email</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li style="color: {% if category == 'error' %}red{% else %}green{% endif %};">
+                {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

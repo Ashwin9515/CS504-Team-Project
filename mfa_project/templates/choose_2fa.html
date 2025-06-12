@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose 2FA Method</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f2f2f2; }
+        h1 { color: #333; margin-bottom: 30px; }
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Choose a 2FA Method</h1>
+    <form action="/verify-otp" method="GET" style="display:inline;">
+        <button type="submit">Verify with Email OTP</button>
+    </form>
+    <form action="/verify-totp" method="GET" style="display:inline;">
+        <button type="submit">Verify with Authenticator App</button>
+    </form>
+    <form action="/verify-face-form" method="GET" style="display:inline;">
+        <button type="submit">Verify with Face Recognition</button>
+    </form>
+</body>
+</html>
